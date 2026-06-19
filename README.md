@@ -1,83 +1,62 @@
 # 💬 SentiFeed — Customer Sentiment Analyzer
 
-An AI-powered web application that analyzes customer reviews and 
-classifies them as Positive, Negative, or Neutral sentiment, 
+An AI-powered web application that analyzes real Amazon customer 
+reviews and classifies them as Positive or Negative sentiment, 
 styled as a social media feed.
 
 ## 🔗 Live Demo
-👉 https://sentimentanalysis-iyurfkzycipcnqfexuhcq9.streamlit.app/
+👉 [Click here to try the app](https://sentimentanalysis-iyurfkzycipcnqfexuhcq9.streamlit.app)
+
 ## 📌 Project Overview
-Businesses receive thousands of customer reviews daily. Manually 
-reading each one to gauge customer satisfaction is slow and 
-inefficient. This system automatically classifies review sentiment 
-in real-time, helping businesses identify unhappy customers and 
-prioritize support.
+Businesses receive thousands of customer reviews daily. This system 
+automatically classifies review sentiment in real-time using real 
+Amazon Fine Food Reviews data, helping identify unhappy customers 
+and prioritize support.
 
 ## 📊 Model Performance
 | Metric | Value |
 |--------|-------|
-| Accuracy | 100% (on test dataset) |
-| Sentiment Classes | 3 (Positive, Negative, Neutral) |
-| Training Samples | 1,500 reviews |
+| Accuracy | 87% |
+| Sentiment Classes | 2 (Positive, Negative) |
+| Training Data | 8,000 real Amazon reviews |
+| Dataset Source | Amazon Fine Food Reviews (Kaggle) |
 
 ## 🛠️ Tech Stack
 - **Language:** Python
 - **ML Model:** Logistic Regression
-- **Text Processing:** TF-IDF Vectorization
+- **Text Processing:** TF-IDF Vectorization with negation handling
 - **Libraries:** Scikit-learn, Pandas, NumPy, Matplotlib
 - **Web App:** Streamlit
-- **UI Style:** Social media feed design
 
 ## 🚀 Features
 - ✍️ Real-time review analysis with social-feed style posting
-- 📊 Confidence score visualization for each sentiment class
-- 📈 Live feed statistics (total posts, positive/negative/neutral counts)
-- 🎨 Color-coded sentiment pills (green/red/orange)
-- 🕐 Analysis history feed
+- 📊 Confidence score visualization
+- 📈 Live feed statistics
+- 🎨 Color-coded sentiment pills
 
-## 📁 Project Structure
-sentiment-analysis/
+## ⚙️ Key Technical Decisions
+- Used **real Amazon Fine Food Reviews** instead of synthetic data 
+  for authentic results
+- Implemented **negation handling** (e.g., "not good") which 
+  improved accuracy from 85.3% to 87%
+- Balanced dataset (4000 positive + 4000 negative) to avoid bias
 
-│
-
-├── app.py                  # Streamlit web app
-
-├── model.py                # Model training script
-
-├── eda.py                  # Exploratory data analysis
-
-├── generate_data.py        # Dataset generation script
-
-├── sentiment_model.pkl     # Trained ML model
-
-├── tfidf.pkl                # TF-IDF vectorizer
-
-├── reviews.csv              # Training dataset
-
-└── requirements.txt         # Dependencies
 ## ⚙️ How to Run Locally
 ```bash
 git clone https://github.com/Dhivanya/sentiment_analysis.git
 cd sentiment_analysis
 pip install -r requirements.txt
+python model.py
 streamlit run app.py
 ```
 
-## 📈 How It Works
-1. User enters a customer review
-2. Text is converted to numerical features using TF-IDF
-3. Logistic Regression model predicts the sentiment
-4. Result displayed with confidence score and visual breakdown
-
-## 🏦 Sample Predictions
-| Review | Predicted Sentiment |
-|--------|---------------------|
-| "This product is amazing and works perfectly" | 😊 Positive |
-| "Terrible product complete waste of money" | 😠 Negative |
-| "Product is okay nothing special" | 😐 Neutral |
-
 ## 🌍 Real World Applications
-- E-commerce platforms analyzing product reviews
-- Restaurant apps monitoring customer feedback
-- Social media brand sentiment monitoring
-- Customer support prioritization systems
+- E-commerce review monitoring
+- Customer support prioritization
+- Brand sentiment tracking
+
+## ⚠️ Known Limitations
+TF-IDF based models can struggle with complex negation and sarcasm 
+since they don't capture full context like deep learning models 
+(BERT) do. This was partially addressed using a custom negation 
+preprocessing step.
